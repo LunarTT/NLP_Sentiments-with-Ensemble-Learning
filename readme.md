@@ -165,7 +165,7 @@ flowchart TD
 
 * สามารถดูราละเอียดผลได้ที่ไฟล์ (ผลของงาน NLP (IMDB,YELP,AMAZON)) หรือที่ลิงค์ https://docs.google.com/spreadsheets/d/1siagjH-iOd4BM9IVo3FKViE8D7l83o7Dy7d0q8VEf-0/edit?usp=sharing
 
-* สามารถดูผลบน colab ได้ดังนี้
+* link ของงานบน Colab
     * IMDB   = https://colab.research.google.com/drive/1Tois4CMqL0frTL1rjQeVlvHKXHrysKEM?usp=sharing
     * YELP   = https://colab.research.google.com/drive/1yjKrk88bE8drWA_w4Y_3GeckxZB3r9Te?usp=sharing
     * AMAZON = https://colab.research.google.com/drive/13ScnIUEIKRoLf-a34fRojCmVkrNdDVMD?usp=sharing
