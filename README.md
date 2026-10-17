@@ -1,6 +1,6 @@
-# 🎬 IMDb Movie Reviews Sentiment Analysis & Machine Learning Pipeline
+# 🎬 Sentiment Analysis with Machine learning and Ensemble
 
-โปรเจกต์วิเคราะห์อารมณ์และจำแนกความรู้สึกจากข้อความรีวิวหนัง (Sentiment Analysis) บนชุดข้อมูล IMDb Dataset โดยประยุกต์ใช้การทำความสะอาดข้อความขั้นสูง (Advanced Text Cleansing & Lemmatization), การแปลงข้อเป็นเวกเตอร์หลายรูปแบบ (BoW, TF-IDF, Word2Vec, FastText, GloVe), การเปรียบเทียบประสิทธิภาพโมเดล Machine Learning 5 อัลกอริทึม ทั้งในรูปแบบ Train-Test Split (80/20) และ 5-Fold Cross Validation รวมถึงการนำโมเดลมารวมพลังด้วยเทคนิค Ensemble Learning (Hard Voting, Soft Voting, Weighted Ensemble)
+โปรเจกต์วิเคราะห์อารมณ์และจำแนกความรู้สึกจากข้อความรีวิวบนชุดข้อมูล IMDb,Yelp,Amazon Dataset โดยประยุกต์ใช้การทำความสะอาดข้อความ (Advanced Text Cleansing & Lemmatization), การแปลงข้อเป็นเวกเตอร์หลายรูปแบบ (BoW, TF-IDF, Word2Vec, FastText, GloVe), การเปรียบเทียบประสิทธิภาพโมเดล Machine Learning 5 อัลกอริทึม ทั้งในรูปแบบ Train-Test Split (80/20) และ 5-Fold Cross Validation รวมถึงการนำโมเดลมารวมพลังด้วยเทคนิค Ensemble Learning (Hard Voting, Soft Voting, Weighted Ensemble)
 
 ## 📌 คุณสมบัติเด่นของโปรเจกต์ (Key Features)
 
@@ -58,7 +58,7 @@
 
 ## 📊 รายละเอียดชุดข้อมูล (Dataset)
 
-* **Source**: IMDb Labelled Dataset (`imdb_labelled.txt`)
+* **Source**: IMDb Labelled Dataset (`imdb_labelled.txt`), YELP Labelled Dataset (`yelp_labelled.txt`), AMAZON Labelled Dataset (`amazon_labelled.txt`)
 
 * **Total Samples**: 1,000 ข้อความรีวิวภาษาอังกฤษ
 
@@ -74,24 +74,27 @@
 
 ```
 ├── Dataset/
-│   └── imdb_labelled.txt       # ชุดข้อมูล IMDb Labelled Dataset
-├── sentiment_analysis.ipynb    # Jupyter / Colab Notebook หลัก
-├── requirements.txt            # ไฟล์ระบุไลบรารีที่จำเป็น
-└── README.md                   # อธิบายโปรเจกต์และวิธีการใช้งาน
+│   └── imdb_labelled.txt               # ชุดข้อมูล IMDb Labelled Dataset
+│   └── yelp_labelled.txt               # ชุดข้อมูล YELP Labelled Dataset
+│   └── amazon_labelled.txt             # ชุดข้อมูล AMAZON Labelled Dataset
+├── IMDB_ensemble.ipynb                 # Jupyter / Colab Notebook หลักของ imdb
+├── YELP_ensemble.ipynb                 # Jupyter / Colab Notebook หลักของ yelp
+├── AMAZON_ensemble.ipynb               # Jupyter / Colab Notebook หลักของ amazon
+├── requirements.txt                    # ไฟล์ระบุไลบรารีที่จำเป็น
+├── ผลของงาน NLP (IMDB,YELP,AMAZON)     # ผลของงานที่บันทึกใน excel
+└── README.md                           # อธิบายโปรเจกต์และวิธีการใช้งาน
 
 ```
 
-## 🚀 วิธีการนำไปเล่น / การติดตั้งและเรียกใช้งาน (How to Run)
+## 🚀 วิธีการนำไปใช้ / การติดตั้งและเรียกใช้งาน (How to Run)
 
-คุณสามารถเลือกเล่นและรันโปรเจกต์นี้ได้ 2 วิธีหลักๆ:
-
-### วิธีที่ 1: รันบน Google Colab (แนะนำ 🌟)
+###  รันบน Google Colab 
 
 1. **อัปโหลดไฟล์ไปยัง Google Drive**:
 
    * สร้างโฟลเดอร์ใน Google Drive ชื่อ `Colab Notebooks/Dataset`
 
-   * นำไฟล์ `imdb_labelled.txt` ไปวางไว้ในโฟลเดอร์ `Dataset/`
+   * นำไฟล์ `imdb_labelled.txt`,`yelp_labelled.txt`,`amazon_labelled.txt` ไปวางไว้ในโฟลเดอร์ `Dataset/`
 
 2. **เปิดไฟล์ Notebook บน Google Colab**:
 
@@ -104,53 +107,7 @@
 4. **รันเซลล์ตามลำดับ**:
 
    * สามารถกด `Runtime` -> `Run all` เพื่อรันการทำงานทั้งหมดตั้งแต่ Data Preprocessing จนถึง Ensemble Learning
-
-### วิธีที่ 2: รันบนเครื่องส่วนบุคคล (Local Machine)
-
-#### 1. คลองโปรเจกต์ (Clone Repository)
-
-```
-git clone https://github.com/your-username/imdb-sentiment-analysis.git
-cd imdb-sentiment-analysis
-
-```
-
-#### 2. สร้าง Virtual Environment (แนะนำ)
-
-```
-# บน Windows
-python -m venv venv
-venv\Scripts\activate
-
-# บน macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
-
-```
-
-#### 3. ติดตั้ง Dependencies
-
-สร้างไฟล์ `requirements.txt` หากยังไม่มี หรือรันคำสั่งติดตั้งแพ็กเกจเหล่านี้:
-
-```
-pip install pandas numpy scikit-learn nltk gensim matplotlib seaborn jupyter
-
-```
-
-#### 4. เปิดใช้งาน Jupyter Notebook
-
-```
-jupyter notebook
-
-```
-
-เปิดไฟล์ `sentiment_analysis.ipynb` และปรับแก้ path ของชุดข้อมูลในโค้ดให้อ่านจากโฟลเดอร์ Local เช่น:
-
-```
-# เปลี่ยนจาก path ของ Colab เป็น Local Path
-dataset = pd.read_csv('Dataset/imdb_labelled.txt', sep='\t', header=None, quoting=csv.QUOTE_NONE)
-
-```
+     
 
 ## 🔄 ขั้นตอนการประมวลผลโมเดล (Pipeline Overview)
 
@@ -184,14 +141,11 @@ flowchart TD
 
 5. **Ensemble Learning**: คัดเลือกโมเดลที่มีประสิทธิภาพสูงสุด (Top Models) มารวมผลทำนายเพื่อเพิ่มความแม่นยำและความเสถียร
 
-## 📈 สรุปผลการทดลอง (Key Results)
+## 📈 ผลการทำงาน
 
-* **Feature Performance**: การใช้ **TF-IDF** ร่วมกับ **BoW** สำหรับโมเดลตระกูล Linear (เช่น Linear SVM และ Logistic Regression) ให้ประสิทธิภาพสูงในการแยกแยะข้อความสั้น
+* สามารถดูราละเอียดผลได้ที่ไฟล์ (ผลของงาน NLP (IMDB,YELP,AMAZON)) หรือที่ลิงค์ https://docs.google.com/spreadsheets/d/1siagjH-iOd4BM9IVo3FKViE8D7l83o7Dy7d0q8VEf-0/edit?usp=sharing
 
-* **Word Embeddings**: การถ่วงน้ำหนักด้วย TF-IDF บน Pre-trained Word Embeddings (Word2Vec, FastText, GloVe) ช่วยจับความหมายเชิงบริบท (Semantic Context) ได้ดีเยี่ยม
-
-* **Ensemble Advantage**: เทคนิค **Soft Voting** และ **Weighted Ensemble** ช่วยลดความเอนเอียง (Variance) ของโมเดลเดี่ยว และยกระดับค่า F1-Score รวมให้มีความเสถียรสูงขึ้น
-
-## 📝 ไลเซนส์ (License)
-
-โปรเจกต์นี้เปิดให้ใช้งานและศึกษาฟรีภายใต้สิทธิ์ [MIT License](LICENSE)
+* สามารถดูผลบน colab ได้ดังนี้
+    * IMDB   = https://colab.research.google.com/drive/1Tois4CMqL0frTL1rjQeVlvHKXHrysKEM?usp=sharing
+    * YELP   = https://colab.research.google.com/drive/1yjKrk88bE8drWA_w4Y_3GeckxZB3r9Te?usp=sharing
+    * AMAZON = https://colab.research.google.com/drive/13ScnIUEIKRoLf-a34fRojCmVkrNdDVMD?usp=sharing
