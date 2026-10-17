@@ -80,7 +80,6 @@
 ├── IMDB_ensemble.ipynb                 # Jupyter / Colab Notebook หลักของ imdb
 ├── YELP_ensemble.ipynb                 # Jupyter / Colab Notebook หลักของ yelp
 ├── AMAZON_ensemble.ipynb               # Jupyter / Colab Notebook หลักของ amazon
-├── requirements.txt                    # ไฟล์ระบุไลบรารีที่จำเป็น
 ├── ผลของงาน NLP (IMDB,YELP,AMAZON)     # ผลของงานที่บันทึกใน excel
 └── README.md                           # อธิบายโปรเจกต์และวิธีการใช้งาน
 
