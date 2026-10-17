@@ -113,7 +113,7 @@
 ```mermaid
 flowchart TD
     subgraph Prep ["1. Data Preprocessing"]
-        A[Raw IMDb Dataset] --> B[Advanced Text Cleansing & Lemmatization]
+        A[Raw Dataset] --> B[Advanced Text Cleansing & Lemmatization]
         B --> C[Stratified Train-Test Split 80/20]
     end
 
