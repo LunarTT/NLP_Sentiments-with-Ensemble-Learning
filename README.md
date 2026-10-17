@@ -110,18 +110,39 @@
 
 ## 🔄 ขั้นตอนการประมวลผลโมเดล (Pipeline Overview)
 
-```
+```mermaid
 flowchart TD
-    A[Raw IMDb Dataset] --> B[Advanced Text Cleansing & Lemmatization]
-    B --> C[Stratified Train-Test Split 80/20]
-    C --> D[Feature Engineering]
-    D --> D1[BoW & TF-IDF]
-    D --> D2[Word2Vec, FastText, GloVe]
-    D1 --> E[Model Training & CV]
-    D2 --> E
-    E --> F[Evaluation & Visualization]
-    F --> G[Ensemble Learning - Voting & Weighted]
+    subgraph Prep ["1. Data Preprocessing"]
+        A[Raw IMDb Dataset] --> B[Advanced Text Cleansing & Lemmatization]
+        B --> C[Stratified Train-Test Split 80/20]
+    end
 
+    subgraph Feat ["2. Feature Engineering"]
+        C --> D[Feature Extraction]
+        D --> D1[BoW & TF-IDF]
+        D --> D2[Word2Vec, FastText, GloVe]
+    end
+
+    subgraph Train ["3. Training & Evaluation"]
+        D1 --> E[Model Training & 5-Fold CV]
+        D2 --> E
+        E --> F[Evaluation & Visualization]
+    end
+
+    subgraph Ens ["4. Model Aggregation"]
+        F --> G[Ensemble Learning<br/>Voting & Weighted]
+    end
+
+    %% Custom Styles
+    classDef prepStyle fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef featStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#bf360c;
+    classDef trainStyle fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    classDef ensStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
+
+    class A,B,C prepStyle;
+    class D,D1,D2 featStyle;
+    class E,F trainStyle;
+    class G ensStyle;
 ```
 
 1. **Text Cleansing**: ลบตัวอักษรขยะ, ขยายคำย่อ, ปรับแต่ง Stopwords ให้เหลือคำปฏิเสธและคำแสดงอารมณ์, ทำ Lemmatization ด้วย POS Tagging
